@@ -1,0 +1,46 @@
+package ${package}.${moduleName}.infrastructure.persistence.mybatis.convertor;
+
+
+import ${package}.${moduleName}.domain.model.entity.${className};
+import ${package}.${moduleName}.domain.model.types.${className}Id;
+import ${package}.${moduleName}.infrastructure.persistence.mybatis.entity.${className}Do;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+
+/**
+ * ${comments}Convertor
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@Mapper(componentModel = "spring")
+public interface ${className}Convertor {
+
+	@Mappings({
+			@Mapping(source = "id", target = "id")
+	})
+	${className} to${className}(${className}Do ${pathName}Do);
+
+	@Mappings({
+			@Mapping(source = "id", target = "id")
+	})
+	${className}Do from${className}(${className} ${pathName});
+
+	default ${className}Id id2id(String id) {
+		if (id == null) {
+			return null;
+		}
+		${className}Id typeId = new ${className}Id(id);
+		return typeId;
+	}
+
+	default String id2id(${className}Id typeId) {
+		if (typeId == null) {
+			return null;
+		}
+		return typeId.getId();
+	}
+
+}

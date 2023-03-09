@@ -1,0 +1,37 @@
+package ${package}.${moduleName}.client.dto;
+
+
+import lombok.Data;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+import top.kdla.framework.dto.BaseDto;
+
+
+/**
+ * ${comments}Dto
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+
+@Data
+public class ${className}Dto extends BaseDto {
+
+    #foreach ($column in $columns)
+##    #if($column.attrname != "delFlag"
+##    &&$column.attrname != "createBy"
+##    &&$column.attrname != "createTime"
+##    &&$column.attrname != "updateBy"
+##    &&$column.attrname != "updateTime")
+    /**
+     * $column.comments
+     */
+    private $column.attrType $column.attrname;
+##    #end
+    #end
+
+}
+

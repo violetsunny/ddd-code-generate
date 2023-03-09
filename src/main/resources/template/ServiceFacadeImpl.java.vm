@@ -1,0 +1,94 @@
+package ${package}.${moduleName}.interfaces.facade.impl;
+
+
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import ${package}.${moduleName}.application.${className}Service;
+import ${package}.${moduleName}.domain.model.entity.${className};
+import ${package}.${moduleName}.domain.model.types.${className}Id;
+import ${package}.${moduleName}.domain.repository.${className}Repository;
+import top.kdla.framework.dto.PageResponse;
+import top.kdla.framework.infra.dal.mybatis.util.Query;
+import ${package}.${moduleName}.infrastructure.persistence.mybatis.entity.${className}Do;
+import ${package}.${moduleName}.infrastructure.persistence.mybatis.mapper.${className}Mapper;
+import ${package}.${moduleName}.interfaces.facade.${className}ServiceFacade;
+import ${package}.${moduleName}.application.convertor.${className}DtoConvertor;
+import ${package}.${moduleName}.client.dto.${className}Dto;
+import org.springframework.stereotype.Component;
+
+import org.springframework.util.CollectionUtils;
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+/**
+ * ${comments}FacadeImpl
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@Component
+public class ${className}ServiceFacadeImpl implements ${className}ServiceFacade {
+
+	@Resource
+	private ${className}Service ${pathName}Service;
+
+	@Resource
+	private ${className}Mapper ${pathName}Mapper;
+
+	@Resource
+	private ${className}Repository ${pathName}Repository;
+
+	@Resource
+	private ${className}DtoConvertor dtoConvertor;
+
+
+	@Override
+	public PageResponse<${className}Dto> queryPage(Map<String, Object> params) {
+		IPage<${className}Do> page = ${pathName}Mapper.queryPage(new Query().getPage(params), params);
+		List<${className}Do> records = page.getRecords();
+		List<${className}Dto> dtoList = Collections.EMPTY_LIST;
+		if (CollectionUtils.isEmpty(records)) {
+			return PageResponse.of(dtoList, Long.valueOf(page.getTotal()).intValue(), Long.valueOf(page.getSize()).intValue(), Long.valueOf(page.getCurrent()).intValue());
+		}
+		dtoList = records.stream().map(dtoConvertor::fromDo).collect(Collectors.toList());
+		return PageResponse.of(dtoList, Long.valueOf(page.getTotal()).intValue(), Long.valueOf(page.getSize()).intValue(), Long.valueOf(page.getCurrent()).intValue());
+	}
+
+	@Override
+	public ${className}Dto find(String id) {
+		return dtoConvertor.from${className}(${pathName}Repository.find(new ${className}Id(id)));
+	}
+
+	@Override
+	public void save(${className}Dto ${pathName}Dto) {
+		${className} ${pathName} = dtoConvertor.to${className}(${pathName}Dto);
+		${pathName}Service.add(${pathName});
+		${pathName}Dto.setId(${pathName}.getId().getId());
+	}
+
+	@Override
+	public void update(${className}Dto ${pathName}Dto) {
+		${className} ${pathName} = dtoConvertor.to${className}(${pathName}Dto);
+		${pathName}Service.update(${pathName} );
+	}
+
+	@Override
+	public void deleteBatch(List<String> ids) {
+		List<${className}Id> tempIds = new ArrayList<>();
+		ids.forEach(id -> {
+			tempIds.add(new ${className}Id(id));
+		});
+		${pathName}Service.delete(tempIds);
+	}
+
+	@Override
+	public void disable(String id) {
+		${pathName}Service.disable(new ${className}Id(id));
+	}
+
+}
+

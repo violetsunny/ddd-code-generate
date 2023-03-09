@@ -1,0 +1,68 @@
+package ${package}.${moduleName}.application.service.impl;
+
+import ${package}.${moduleName}.domain.model.entity.${className};
+import ${package}.${moduleName}.domain.model.types.${className}Id;
+import ${package}.${moduleName}.domain.repository.${className}Repository;
+import ${package}.${moduleName}.domain.specification.${className}UpdateSpecification;
+import ${package}.${moduleName}.application.service.${className}ApplicationService;
+import ${package}.${moduleName}.application.convertor.${className}DtoConvertor;
+import ${package}.${moduleName}.client.dto.command.${className}Command;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * ${comments}ApplicationServiceImpl
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@Service
+public class ${className}ApplicationServiceImpl implements ${className}ApplicationService {
+
+	@Resource
+	private ${className}Repository ${pathName}Repository;
+
+	@Resource
+	private ${className}DtoConvertor dtoConvertor;
+
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public boolean add(${className}Command ${pathName}Command) {
+		${className} ${pathName} = dtoConvertor.to${className}(${pathName}Command);
+		return ${pathName}Repository.store(${pathName});
+	}
+
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public boolean update(${className}Command ${pathName}Command) {
+		${className} ${pathName} = dtoConvertor.to${className}(${pathName}Command);
+		${className}UpdateSpecification ${pathName}UpdateSpecification = new ${className}UpdateSpecification();
+		${pathName}UpdateSpecification.isSatisfiedBy(${pathName});
+		return  ${pathName}Repository.store(${pathName} );
+	}
+
+	@Override
+	public boolean deleteBatch(List<String> ids) {
+		List<${className}Id> tempIds = new ArrayList<>();
+		ids.forEach(id -> {
+			tempIds.add(new ${className}Id(id));
+		});
+		return  ${pathName}Repository.delete(tempIds);
+	}
+
+	@Override
+	public boolean disable(String id) {
+		${className} ${pathName} = ${pathName}Repository.find(new ${className}Id(id));
+		${pathName}.disable();
+		${className}UpdateSpecification ${pathName}UpdateSpecification = new ${className}UpdateSpecification();
+		${pathName}UpdateSpecification.isSatisfiedBy(${pathName});
+		return	${pathName}Repository.update(${pathName});
+	}
+
+}
+

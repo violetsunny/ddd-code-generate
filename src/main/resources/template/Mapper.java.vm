@@ -1,0 +1,38 @@
+package ${package}.${moduleName}.infrastructure.persistence.mybatis.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import ${package}.${moduleName}.infrastructure.persistence.mybatis.entity.${className}Do;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Map;
+
+/**
+ * ${comments}Mapper
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@Mapper
+public interface ${className}Mapper extends BaseMapper<${className}Do> {
+
+    /**
+     * 分页查询
+     *
+     * @param page
+     * @param params
+     * @return
+     */
+    IPage<${className}Do> queryPage(IPage<${className}Do> page, @Param("params") Map<String, Object> params);
+
+    /**
+     * 查询
+     *
+     * @param params
+     * @return
+     */
+    ${className}Do queryEntity(@Param("params") Map<String, Object> params);
+
+}

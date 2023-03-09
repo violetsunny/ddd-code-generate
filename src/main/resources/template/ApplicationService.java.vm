@@ -1,0 +1,46 @@
+package ${package}.${moduleName}.application.service;
+
+
+import ${package}.${moduleName}.client.dto.command.${className}Command;
+
+import java.util.List;
+
+
+/**
+ * ${comments}ApplicationService
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+public interface ${className}ApplicationService {
+
+    /**
+     * 保存
+     *
+     * @param ${pathName}Command
+     */
+    boolean add(${className}Command ${pathName}Command);
+
+    /**
+     * 更新
+     *
+     * @param ${pathName}Command
+     */
+    boolean update(${className}Command ${pathName}Command);
+
+    /**
+     * 批量删除
+     *
+     * @param ids
+     */
+    boolean deleteBatch(List<String> ids);
+
+    /**
+     * 禁用
+     *
+     * @param id
+     */
+    boolean disable(String id);
+
+}

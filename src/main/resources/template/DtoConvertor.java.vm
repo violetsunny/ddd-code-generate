@@ -1,0 +1,77 @@
+package ${package}.${moduleName}.application.convertor;
+
+import ${package}.${moduleName}.domain.model.entity.${className};
+import ${package}.${moduleName}.domain.model.types.${className}Id;
+import ${package}.${moduleName}.client.dto.${className}Dto;
+import ${package}.${moduleName}.client.dto.command.${className}Command;
+import ${package}.${moduleName}.infrastructure.persistence.mybatis.entity.${className}Do;
+
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+import org.springframework.util.StringUtils;
+
+/**
+ * ${comments}DtoConvertor
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@Mapper(componentModel = "spring")
+public interface ${className}DtoConvertor {
+
+    /**
+     * dto --> entity
+     * @param ${pathName}Dto
+     * @return
+     */
+    @Mappings({@Mapping(source = "id", target = "id")})
+    ${className} to${className}(final ${className}Dto ${pathName}Dto);
+
+    /**
+     * dto --> entity
+     * @param ${pathName}Command
+     * @return
+     */
+     @Mappings({@Mapping(source = "id", target = "id")})
+     ${className} to${className}(final ${className}Command ${pathName}Command);
+
+    /**
+     * entity --> dto
+     * @param ${pathName}
+     * @return
+     */
+     @Mappings({@Mapping(source = "id", target = "id")})
+     ${className}Dto from${className}(final ${className} ${pathName});
+
+    /**
+     * cmd --> dto
+     * @param ${pathName}Command
+     * @return
+     */
+      ${className}Dto from${className}Command(final ${className}Command ${pathName}Command);
+
+    /**
+     * do --> dto
+     * @param ${pathName}Do
+     * @return
+     */
+      ${className}Dto fromDo(final ${className}Do ${pathName}Do);
+
+      default ${className}Id id2id(String id) {
+         if (StringUtils.isEmpty(id)) {
+             return null;
+         }
+         ${className}Id typeId = new ${className}Id(id);
+         return typeId;
+      }
+
+      default String id2id(${className}Id typeId) {
+         if (typeId == null) {
+             return null;
+         }
+         return typeId.getId();
+      }
+
+}

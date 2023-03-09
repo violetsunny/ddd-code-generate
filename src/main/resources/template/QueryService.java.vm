@@ -1,0 +1,34 @@
+package ${package}.${moduleName}.application.service;
+
+
+import top.kdla.framework.dto.PageResponse;
+import ${package}.${moduleName}.client.dto.${className}Dto;
+import ${package}.${moduleName}.client.dto.query.${className}PageQuery;
+
+/**
+ * ${comments}QueryService
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+public interface ${className}QueryService {
+
+    /**
+     * 分页查询
+     *
+     * @param pageQuery
+     * @return
+     */
+    PageResponse<${className}Dto> queryPage(${className}PageQuery pageQuery);
+
+
+    /**
+     * 通过ID获取${comments}
+     *
+     * @param id
+     * @return
+     */
+    ${className}Dto find(String id);
+
+}

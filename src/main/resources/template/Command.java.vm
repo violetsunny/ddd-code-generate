@@ -1,0 +1,49 @@
+package ${package}.${moduleName}.client.dto.command;
+
+
+import top.kdla.framework.validator.group.UpdateGroup;
+import top.kdla.framework.dto.Command;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+#if(${hasBigDecimal})
+import java.math.BigDecimal;
+#end
+import java.util.Date;
+
+/**
+ * ${comments}Command
+ * 
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@Data
+@ApiModel(value = "${comments}", description = "${comments}")
+public class ${className}Command extends Command {
+
+#foreach ($column in $columns)
+	#if($column.attrname != "delFlag"
+	&&$column.attrname != "createBy"
+	&&$column.attrname != "createTime"
+	&&$column.attrname != "updateBy"
+	&&$column.attrname != "updateTime"
+	&&$column.attrname != "tenantId")
+	/**
+	 * $column.comments
+	 */
+	@ApiModelProperty(value = "${comments}$column.attrname")
+	#if($column.attrType == "String")
+	@NotBlank(message = "${comments}$column.attrname 不能为空", groups = UpdateGroup.class)
+	#end
+	#if($column.attrType != "String")
+	@NotNull(message = "${comments}$column.attrname 不能为空", groups = UpdateGroup.class)
+	#end
+	private $column.attrType $column.attrname;
+	#end
+#end
+
+}

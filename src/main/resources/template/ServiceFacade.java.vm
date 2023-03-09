@@ -1,0 +1,65 @@
+package ${package}.${moduleName}.interfaces.facade;
+
+
+import top.kdla.framework.dto.PageResponse;
+import ${package}.${moduleName}.client.dto.${className}Dto;
+
+import java.util.List;
+import java.util.Map;
+
+
+/**
+ * ${comments}Facade
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+public interface ${className}ServiceFacade {
+
+    /**
+     * 分页查询
+     *
+     * @param params
+     * @return
+     */
+    PageResponse<${className}Dto> queryPage(Map<String, Object> params);
+
+
+    /**
+     * 通过ID获取${comments}
+     *
+     * @param id
+     * @return
+     */
+    ${className}Dto find(String id);
+
+    /**
+     * 保存
+     *
+     * @param ${pathName}Dto
+     */
+    void save(${className}Dto ${pathName}Dto);
+
+    /**
+     * 更新
+     *
+     * @param ${pathName}Dto
+     */
+    void update(${className}Dto ${pathName}Dto);
+
+    /**
+     * 批量删除
+     *
+     * @param ids
+     */
+    void deleteBatch(List<String> ids);
+
+    /**
+     * 禁用员工
+     *
+     * @param id
+     */
+    void disable(String id);
+
+}

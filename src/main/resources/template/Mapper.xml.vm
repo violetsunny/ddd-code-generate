@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${package}.${moduleName}.infrastructure.persistence.mybatis.mapper.${className}Mapper">
+    <sql id="Base_Column_List">
+    #foreach ($column in $columns)
+        #if($foreach.hasNext)
+        u.$column.columnName,
+        #else
+        u.$column.columnName
+        #end
+    #end
+    </sql>
+    <select id="queryPage" parameterType="Map"
+            resultType="${package}.${moduleName}.infrastructure.persistence.mybatis.entity.${className}Do">
+
+        SELECT
+            <include refid="Base_Column_List" />
+        FROM
+            ${tableName} u
+        <where>
+            #foreach ($column in $columns)
+                #if($column.attrname == "delFlag")
+                    AND u.del_flag='0'
+                #end
+                #if($column.attrname != "id"
+                &&$column.attrname != "delFlag"
+                &&$column.attrname != "createBy"
+                &&$column.attrname != "createTime"
+                &&$column.attrname != "updateBy"
+                &&$column.attrname != "updateTime"
+                &&$column.attrname != "state")
+                <if test="params.$column.attrname != null and params.$column.attrname !=''">
+                    AND u.$column.columnName = #{params.$column.attrname}
+                </if>
+                #end
+                #if($column.attrname == "state")
+                <if test="params.state != null ">
+                    AND u.state = #{params.state}
+                </if>
+                #end
+                #if($column.attrname == "createTime")
+                <if test="params.createTimeStart != null ">
+                    AND u.create_time &gt;= #{params.createTimeStart}
+                </if>
+                <if test="params.createTimeEnd != null ">
+                    AND u.create_time &lt;= #{params.createTimeEnd}
+                </if>
+                #end
+            #end
+        </where>
+        order by u.create_time desc
+    </select>
+
+    <select id="queryEntity" parameterType="Map"
+            resultType="${package}.${moduleName}.infrastructure.persistence.mybatis.entity.${className}Do">
+        SELECT
+            <include refid="Base_Column_List" />
+        FROM
+            ${tableName} u
+        <where>
+            #if($!columns.contains("delFlag"))
+            AND u.del_flag='0'
+            #end
+            <if test="params.id != null and params.id !=''">
+            AND u.id = #{params.id}
+            </if>
+        </where>
+    </select>
+</mapper>
