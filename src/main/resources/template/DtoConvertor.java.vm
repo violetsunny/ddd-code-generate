@@ -4,7 +4,7 @@ import ${package}.${moduleName}.domain.model.entity.${className};
 import ${package}.${moduleName}.domain.model.types.${className}Id;
 import ${package}.${moduleName}.client.dto.${className}Dto;
 import ${package}.${moduleName}.client.dto.command.${className}Command;
-import ${package}.${moduleName}.infrastructure.persistence.mybatis.entity.${className}Do;
+import ${package}.${moduleName}.infra.persistence.mybatis.entity.${className}Do;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -60,18 +60,17 @@ public interface ${className}DtoConvertor {
       ${className}Dto fromDo(final ${className}Do ${pathName}Do);
 
       default ${className}Id id2id(String id) {
-         if (StringUtils.isEmpty(id)) {
+         if (StringUtils.hasText(id)) {
              return null;
          }
-         ${className}Id typeId = new ${className}Id(id);
-         return typeId;
+          return new ${className}Id(id);
       }
 
       default String id2id(${className}Id typeId) {
          if (typeId == null) {
              return null;
          }
-         return typeId.getId();
+         return typeId.get();
       }
 
 }

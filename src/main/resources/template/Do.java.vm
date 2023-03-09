@@ -1,31 +1,32 @@
-package ${package}.${moduleName}.client.dto;
+package ${package}.${moduleName}.infra.persistence.mybatis.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import top.kdla.framework.dto.BaseModel;
-
+import java.io.Serializable;
 
 /**
- * ${comments}Dto
+ * ${comments}DO
  *
  * @author ${author}
  * @email ${email}
  * @date ${datetime}
  */
-
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor(staticName = "of")
 @Data
-public class ${className}Dto extends BaseModel {
+@TableName("${tableName}")
+public class ${className}Do implements Serializable {
     #foreach ($column in $columns)
-##    #if($column.attrname != "delFlag"
+##    #if($column.attrname != "id"
+##    &&$column.attrname != "delFlag"
 ##    &&$column.attrname != "createBy"
 ##    &&$column.attrname != "createTime"
 ##    &&$column.attrname != "updateBy"
@@ -37,6 +38,5 @@ public class ${className}Dto extends BaseModel {
     private $column.attrType $column.attrname;
 ##    #end
     #end
-
 }
 

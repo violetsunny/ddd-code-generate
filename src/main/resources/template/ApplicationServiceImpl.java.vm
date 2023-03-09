@@ -9,6 +9,7 @@ import ${package}.${moduleName}.application.convertor.${className}DtoConvertor;
 import ${package}.${moduleName}.client.dto.command.${className}Command;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import java.util.List;
  * @date ${datetime}
  */
 @Service
+@Slf4j
 public class ${className}ApplicationServiceImpl implements ${className}ApplicationService {
 
 	@Resource
@@ -54,15 +56,5 @@ public class ${className}ApplicationServiceImpl implements ${className}Applicati
 		});
 		return  ${pathName}Repository.delete(tempIds);
 	}
-
-	@Override
-	public boolean disable(String id) {
-		${className} ${pathName} = ${pathName}Repository.find(new ${className}Id(id));
-		${pathName}.disable();
-		${className}UpdateSpecification ${pathName}UpdateSpecification = new ${className}UpdateSpecification();
-		${pathName}UpdateSpecification.isSatisfiedBy(${pathName});
-		return	${pathName}Repository.update(${pathName});
-	}
-
 }
 

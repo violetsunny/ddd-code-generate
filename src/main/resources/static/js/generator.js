@@ -120,10 +120,10 @@ var vm = new Vue({
                 return;
             }
             var key5 = $("#tablePrefix").val();
-            if (key5 == null || key5 == "" || key5 == '') {
-                alert("请输入表名的前缀[tablePrefix]");
-                return;
-            }
+            // if (key5 == null || key5 == "" || key5 == '') {
+            //     alert("请输入表名的前缀[tablePrefix]");
+            //     return;
+            // }
 
             var key6 = 0;
             var key7 = $("#adminUrl").val();

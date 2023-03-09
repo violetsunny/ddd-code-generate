@@ -3,6 +3,8 @@ package ${package}.${moduleName}.interfaces.web;
 
 import top.kdla.framework.dto.SingleResponse;
 import top.kdla.framework.dto.PageResponse;
+import top.kdla.framework.dto.MultiResponse;
+import top.kdla.framework.catchlog.CatchAndLog;
 import top.kdla.framework.validator.group.AddGroup;
 import top.kdla.framework.validator.group.UpdateGroup;
 import ${package}.${moduleName}.application.service.${className}QueryService;
@@ -11,16 +13,16 @@ import ${package}.${moduleName}.client.dto.${className}Dto;
 import ${package}.${moduleName}.client.dto.command.${className}Command;
 import ${package}.${moduleName}.client.dto.query.${className}PageQuery;
 import ${package}.${moduleName}.application.convertor.${className}DtoConvertor;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import lombok.extern.slf4j.Slf4j;
 #if(${isFirst})
 import ${package}.${moduleName}.interfaces.facade.${className}AllServiceFacade;
 import ${package}.${moduleName}.client.dto.command.${className}AllCommand;
 #end
 import java.util.Arrays;
-import java.util.Map;
 import javax.annotation.Resource;
 
 
@@ -31,9 +33,11 @@ import javax.annotation.Resource;
  * @email ${email}
  * @date ${datetime}
  */
-@Api(tags = " ${comments}管理")
+@Tag(name = " ${comments}管理")
 @RestController
 @RequestMapping("/${pathName}")
+@Slf4j
+@CatchAndLog
 public class ${className}Controller {
 
     @Resource
@@ -64,27 +68,38 @@ public class ${className}Controller {
     /**
      * ${comments}分页查询
      */
-    @ApiOperation("${comments}分页查询")
-    @GetMapping("/list")
+    @Operation(summary="${comments}分页查询")
+    @GetMapping("/page")
 ##    @RequiresPermissions("${moduleName}:${pathName}:list")
-    public PageResponse<${className}Dto> list(${className}PageQuery ${pathName}PageQuery) {
+    public PageResponse<${className}Dto> page(${className}PageQuery ${pathName}PageQuery) {
         return ${pathName}QueryService.queryPage(${pathName}PageQuery);
+    }
+
+    /**
+     * ${comments}list查询
+     */
+    @Operation(summary="${comments}list查询")
+    @GetMapping("/list")
+        ##    @RequiresPermissions("${moduleName}:${pathName}:list")
+    public MultiResponse<${className}Dto> list() {
+        //TODO list query
+        return MultiResponse.buildSuccess(null);
     }
 
     /**
      * ${comments}信息
      */
-    @ApiOperation("${comments}信息")
-    @GetMapping("/info/{id}")
+    @Operation(summary="${comments}信息")
+    @GetMapping("/find/{id}")
 ##    @RequiresPermissions("${moduleName}:${pathName}:info")
-    public SingleResponse<${className}Dto> info(@PathVariable("id") String id) {
-        return SingleResponse.buildSuccess(${pathName}QueryService.find(id));
+    public SingleResponse<${className}Dto> findById(@PathVariable("id") String id) {
+        return SingleResponse.buildSuccess(${pathName}QueryService.findById(id));
     }
 
     /**
      * 保存${comments}
      */
-    @ApiOperation("保存${comments}")
+    @Operation(summary="保存${comments}")
     @PostMapping("/save")
 ##    @RequiresPermissions("${moduleName}:${pathName}:save")
     public SingleResponse<Boolean> save(@Validated(AddGroup.class) @RequestBody ${className}Command ${pathName}Command) {
@@ -95,7 +110,7 @@ public class ${className}Controller {
     /**
      * 修改${comments}
      */
-    @ApiOperation("修改${comments}")
+    @Operation(summary="修改${comments}")
     @PostMapping("/update")
 ##    @RequiresPermissions("${moduleName}:${pathName}:update")
     public SingleResponse<Boolean> update(@Validated(UpdateGroup.class) @RequestBody ${className}Command ${pathName}Command) {
@@ -105,20 +120,11 @@ public class ${className}Controller {
     /**
      * 删除${comments}
      */
-    @ApiOperation("删除${comments}")
+    @Operation(summary="删除${comments}")
     @PostMapping("/delete")
 ##    @RequiresPermissions("${moduleName}:${pathName}:delete")
     public SingleResponse<Boolean> delete(@RequestBody String[] ids) {
         return SingleResponse.buildSuccess(${pathName}ApplicationService.deleteBatch(Arrays.asList(ids)));
     }
 
-    /**
-     * 禁用${comments}
-     */
-    @ApiOperation("禁用${comments}")
-    @PostMapping("/disable/{id}")
-##    @RequiresPermissions("${moduleName}:${pathName}:disable")
-    public SingleResponse<Boolean> disable(@PathVariable("id") String id) {
-        return SingleResponse.buildSuccess(${pathName}ApplicationService.disable(id));
-    }
 }

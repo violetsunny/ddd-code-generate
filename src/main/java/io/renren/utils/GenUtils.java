@@ -122,7 +122,8 @@ public class GenUtils {
 
             if (isAuto) {
                 try {
-                    GenUtilsCommon.genetatorAuto(GenUtilsCommon.getFileName(template, tableEntity.getClassName(), config.getString("package"), config.getString("moduleName"), "father"), sw, sqlAuto);
+                    String name = GenUtilsCommon.getFileName(template, tableEntity.getClassName(), config.getString("package"), config.getString("moduleName"), "father");
+                    GenUtilsCommon.genetatorAuto(name, sw, sqlAuto);
                 } catch (Exception e) {
                     e.printStackTrace();
                     throw new RRException("渲染模板失败，表名：" + tableEntity.getTableName(), e);
@@ -130,7 +131,8 @@ public class GenUtils {
             } else {
                 try {
                     //添加到zip
-                    zip.putNextEntry(new ZipEntry(GenUtilsCommon.getFileName(template, tableEntity.getClassName(), config.getString("package"), config.getString("moduleName"), "father")));
+                    String name = GenUtilsCommon.getFileName(template, tableEntity.getClassName(), config.getString("package"), config.getString("moduleName"), "father");
+                    zip.putNextEntry(new ZipEntry(name));
                     IOUtils.write(sw.toString(), zip, "UTF-8");
                     IOUtils.closeQuietly(sw);
                     zip.closeEntry();

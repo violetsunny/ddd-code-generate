@@ -1,8 +1,8 @@
-package ${package}.${moduleName}.infrastructure.persistence.mybatis.mapper;
+package ${package}.${moduleName}.infra.persistence.mybatis.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import ${package}.${moduleName}.infrastructure.persistence.mybatis.entity.${className}Do;
+import ${package}.${moduleName}.infra.persistence.mybatis.entity.${className}Do;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -35,4 +35,10 @@ public interface ${className}Mapper extends BaseMapper<${className}Do> {
      */
     ${className}Do queryEntity(@Param("params") Map<String, Object> params);
 
+    /**
+     * 根据ID查询
+     * @param id
+     * @return
+     */
+    ${className}Do findById(@Param("id") String id);
 }

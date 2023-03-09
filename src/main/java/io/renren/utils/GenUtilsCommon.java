@@ -75,7 +75,7 @@ public class GenUtilsCommon {
         templates.add("template/PageQuery.java.vm");
         templates.add("template/Controller.java.vm");
         templates.add("template/Convertor.java.vm");
-        templates.add("template/DO.java.vm");
+        templates.add("template/Do.java.vm");
         templates.add("template/Dto.java.vm");
         templates.add("template/DtoConvertor.java.vm");
         templates.add("template/Entity.java.vm");
@@ -85,8 +85,8 @@ public class GenUtilsCommon {
         templates.add("template/Mapper.xml.vm");
         templates.add("template/Repository.java.vm");
         templates.add("template/RepositoryImpl.java.vm");
-        templates.add("template/Service.java.vm");
-        templates.add("template/ServiceImpl.java.vm");
+//        templates.add("template/Service.java.vm");
+//        templates.add("template/ServiceImpl.java.vm");
 //        templates.add("template/ServiceFacade.java.vm");
 //        templates.add("template/ServiceFacadeImpl.java.vm");
         templates.add("template/ApplicationService.java.vm");
@@ -172,7 +172,7 @@ public class GenUtilsCommon {
                     + className + "Convertor.java";
         }
         //com.ennew.boot.infrastructure.persistence.mybatis.entity
-        if (template.contains("DO.java.vm")) {
+        if (template.contains("Do.java.vm")) {
             return packagePath
                     + "infrastructure" + File.separator
                     + "persistence" + File.separator

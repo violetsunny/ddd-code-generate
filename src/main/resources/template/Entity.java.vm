@@ -8,9 +8,11 @@ import top.kdla.framework.domain.shared.StateEnum;
 #if(${hasBigDecimal})
 import java.math.BigDecimal;
 #end
-import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * ${comments}领域对象
@@ -19,6 +21,9 @@ import lombok.Data;
  * @email ${email}
  * @date ${datetime}
  */
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor(staticName = "of")
 @Data
 public class ${className} implements Entity<${className}> {
 
@@ -28,16 +33,26 @@ public class ${className} implements Entity<${className}> {
 	#end
 	#if($column.attrname != "id"
     &&$column.attrname != "state")
+
 	/**
 	 * $column.comments
 	 */
 	private $column.attrType $column.attrname;
 	#end
     #if($column.attrname == "state")
-    /**
+
+	/**
      * 状态
      */
     private StateEnum state;
+
+	/**
+     * 禁用
+     */
+	public void disable(){
+		StateEnum state = this.state == StateEnum.DISABLE? StateEnum.ENABLE:StateEnum.DISABLE;
+		this.state = state;
+	}
     #end
 #end
 
@@ -45,13 +60,5 @@ public class ${className} implements Entity<${className}> {
     public boolean sameIdentityAs(${className} other) {
 		return other != null && this.id.sameValueAs(other.id);
     }
-
-	/**
-	 * 禁用
-	 */
-	public void disable(){
-		StateEnum state = this.state == StateEnum.DISABLE? StateEnum.ENABLE:StateEnum.DISABLE;
-		this.state = state;
-	}
 
 }

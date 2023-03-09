@@ -1,9 +1,9 @@
-package ${package}.${moduleName}.infrastructure.persistence.mybatis.convertor;
+package ${package}.${moduleName}.infra.persistence.mybatis.convertor;
 
 
 import ${package}.${moduleName}.domain.model.entity.${className};
 import ${package}.${moduleName}.domain.model.types.${className}Id;
-import ${package}.${moduleName}.infrastructure.persistence.mybatis.entity.${className}Do;
+import ${package}.${moduleName}.infra.persistence.mybatis.entity.${className}Do;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -32,15 +32,14 @@ public interface ${className}Convertor {
 		if (id == null) {
 			return null;
 		}
-		${className}Id typeId = new ${className}Id(id);
-		return typeId;
+		return new ${className}Id(id);
 	}
 
 	default String id2id(${className}Id typeId) {
 		if (typeId == null) {
 			return null;
 		}
-		return typeId.getId();
+		return typeId.get();
 	}
 
 }

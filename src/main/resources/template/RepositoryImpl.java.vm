@@ -1,20 +1,25 @@
-package ${package}.${moduleName}.infrastructure.persistence.mybatis.repository.impl;
+package ${package}.${moduleName}.infra.persistence.mybatis.repository.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import ${package}.${moduleName}.domain.model.entity.${className};
 import ${package}.${moduleName}.domain.model.types.${className}Id;
 import ${package}.${moduleName}.domain.repository.${className}Repository;
-import ${package}.${moduleName}.infrastructure.persistence.mybatis.convertor.${className}Convertor;
-import ${package}.${moduleName}.infrastructure.persistence.mybatis.entity.${className}Do;
-import ${package}.${moduleName}.infrastructure.persistence.mybatis.mapper.${className}Mapper;
+import ${package}.${moduleName}.infra.persistence.mybatis.convertor.${className}Convertor;
+import ${package}.${moduleName}.infra.persistence.mybatis.entity.${className}Do;
+import ${package}.${moduleName}.infra.persistence.mybatis.mapper.${className}Mapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
+import top.kdla.framework.dto.PageQuery;
+import top.kdla.framework.dto.PageResponse;
+import top.kdla.framework.infra.dal.mybatis.util.PlusPageQuery;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * ${comments}Repository实现类
@@ -30,36 +35,39 @@ public class ${className}RepositoryImpl extends ServiceImpl<${className}Mapper, 
 	private ${className}Convertor convertor;
 
 	@Override
-	public ${className} find(${className}Id id) {
-		Map<String, Object> params = new HashMap<>();
-		params.put("id", id.getId());
-		${className}Do ${pathName}Do = baseMapper.queryEntity(params);
-		if (${pathName}Do == null) {
-			return null;
+	public PageResponse<${className}> queryPage(PageQuery pageQuery, Map<String, Object> params) {
+		IPage<${className}Do> page = baseMapper.queryPage(new PlusPageQuery<${className}Do>(pageQuery).getPage(params),params);
+		List<${className}Do> records = page.getRecords();
+		if (CollectionUtils.isEmpty(records)) {
+			return PageResponse.of(page.getSize(), page.getCurrent());
 		}
-		${className} ${pathName} = convertor.to${className}(${pathName}Do);
-		return ${pathName};
+		List<${className}> dtoList = records.stream().map(convertor::to${className}).collect(Collectors.toList());
+		return PageResponse.of(dtoList, page.getTotal(), page.getSize(), page.getCurrent());
+	}
+
+	@Override
+	public ${className} findById(${className}Id id) {
+		${className}Do ${pathName}Do = baseMapper.findById(id.get());
+		return convertor.to${className}(${pathName}Do);
 	}
 
 	@Override
 	public boolean store(${className} ${pathName}) {
 		${className}Do ${pathName}Do = convertor.from${className}(${pathName});
-		boolean isStored = this.saveOrUpdate(${pathName}Do);
-		return isStored;
+		return this.saveOrUpdate(${pathName}Do);
 	}
 
 	@Override
 	public boolean update(${className} ${pathName}) {
 		${className}Do ${pathName}Do = convertor.from${className}(${pathName});
-		boolean isUpdated = this.saveOrUpdate(${pathName}Do);
-		return isUpdated;
+		return this.saveOrUpdate(${pathName}Do);
 	}
 
 	@Override
 	public boolean delete(List<${className}Id> ids) {
 		List<String> tempIds = new ArrayList<>();
 		ids.forEach(tempId -> {
-			tempIds.add(tempId.getId());
+			tempIds.add(tempId.get());
 		});
 		return this.removeByIds(tempIds);
 	}

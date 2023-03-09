@@ -1,7 +1,6 @@
 package ${package}.${moduleName}.domain.model.types;
 
 import top.kdla.framework.domain.shared.ValueObject;
-import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -11,10 +10,9 @@ import org.apache.commons.lang3.StringUtils;
  * @email ${email}
  * @date ${datetime}
  */
-@Data
 public class ${className}Id implements ValueObject<${className}Id> {
 
-	private String id;
+	private final String id;
 
 	public ${className}Id(final String id) {
 		if(StringUtils.isEmpty(id)) {
@@ -23,7 +21,7 @@ public class ${className}Id implements ValueObject<${className}Id> {
 		this.id = id;
 	}
 
-	public String getId() {
+	public String get() {
 		return id;
 	}
 

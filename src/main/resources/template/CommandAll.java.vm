@@ -1,14 +1,19 @@
 package ${package}.${moduleName}.client.dto.command;
 
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor(staticName = "of")
 @Data
-@ApiModel(value = "${comments}主子表", description = "${comments}主子表")
+@Schema(name = "${comments}", description = "${comments}")
 public class ${className}AllCommand {
 
 	@ApiModelProperty(value = "${comments}")
@@ -18,7 +23,7 @@ public class ${className}AllCommand {
 		/**
 		 * $sub.comments
 		 */
-		@ApiModelProperty(value = "$sub.comments")
+		@Schema(description = "$sub.comments")
 		private List<${sub.className}Command> ${sub.classname};
 	#end
 

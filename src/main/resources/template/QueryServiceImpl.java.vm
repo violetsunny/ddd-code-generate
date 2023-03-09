@@ -2,23 +2,18 @@ package ${package}.${moduleName}.application.service.impl;
 
 
 import cn.hutool.core.bean.BeanUtil;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import top.kdla.framework.dto.PageResponse;
-import top.kdla.framework.infra.dal.mybatis.util.PlusPageQuery;
 
 import ${package}.${moduleName}.domain.model.types.${className}Id;
+import ${package}.${moduleName}.domain.model.entity.${className};
 import ${package}.${moduleName}.domain.repository.${className}Repository;
-import ${package}.${moduleName}.infrastructure.persistence.mybatis.entity.${className}Do;
-import ${package}.${moduleName}.infrastructure.persistence.mybatis.mapper.${className}Mapper;
 import ${package}.${moduleName}.application.service.${className}QueryService;
 import ${package}.${moduleName}.application.convertor.${className}DtoConvertor;
 import ${package}.${moduleName}.client.dto.${className}Dto;
 import ${package}.${moduleName}.client.dto.query.${className}PageQuery;
 import org.springframework.stereotype.Service;
 
-import org.springframework.util.CollectionUtils;
 import javax.annotation.Resource;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -34,9 +29,6 @@ import java.util.stream.Collectors;
 public class ${className}QueryServiceImpl implements ${className}QueryService {
 
 	@Resource
-	private ${className}Mapper ${pathName}Mapper;
-
-	@Resource
 	private ${className}Repository ${pathName}Repository;
 
 	@Resource
@@ -46,19 +38,14 @@ public class ${className}QueryServiceImpl implements ${className}QueryService {
 	@Override
 	public PageResponse<${className}Dto> queryPage(${className}PageQuery pageQuery) {
 		Map<String, Object> params = BeanUtil.beanToMap(pageQuery);
-		IPage<${className}Do> page = ${pathName}Mapper.queryPage(new PlusPageQuery<${className}Do>(pageQuery.getPageNum(), pageQuery.getPageSize(), pageQuery.getOrderBy(), pageQuery.getOrderDirection()).getPage(params), params);
-		List<${className}Do> records = page.getRecords();
-		List<${className}Dto> dtoList = Collections.EMPTY_LIST;
-		if (CollectionUtils.isEmpty(records)) {
-			return PageResponse.of(dtoList, Long.valueOf(page.getTotal()).intValue(), Long.valueOf(page.getSize()).intValue(), Long.valueOf(page.getCurrent()).intValue());
-		}
-		dtoList = records.stream().map(dtoConvertor::fromDo).collect(Collectors.toList());
-		return PageResponse.of(dtoList, Long.valueOf(page.getTotal()).intValue(), Long.valueOf(page.getSize()).intValue(), Long.valueOf(page.getCurrent()).intValue());
+		PageResponse<${className}> page = ${pathName}Repository.queryPage(pageQuery, params);
+		List<${className}Dto> dtoList = page.getData().stream().map(dtoConvertor::from${className}).collect(Collectors.toList());
+		return PageResponse.of(dtoList, page.getTotalCount(), page.getPageSize(), page.getPageNum());
 	}
 
 	@Override
-	public ${className}Dto find(String id) {
-		return dtoConvertor.from${className}(${pathName}Repository.find(new ${className}Id(id)));
+	public ${className}Dto findById(String id) {
+		return dtoConvertor.from${className}(${pathName}Repository.findById(new ${className}Id(id)));
 	}
 
 }

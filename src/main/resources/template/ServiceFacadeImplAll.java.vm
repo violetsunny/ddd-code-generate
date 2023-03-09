@@ -3,9 +3,9 @@ package ${package}.${moduleName}.interfaces.facade.impl;
 #foreach ($sub in $subList)
 import ${package}.${moduleName}.client.dto.command.${sub.className}Command;
 import ${package}.${moduleName}.domain.model.entity.${sub.className};
-import ${package}.${moduleName}.infrastructure.persistence.mybatis.convertor.${sub.className}Convertor;
-import ${package}.${moduleName}.infrastructure.persistence.mybatis.entity.${sub.className}DO;
-import ${package}.${moduleName}.infrastructure.persistence.mybatis.repository.impl.${sub.className}RepositoryImpl;
+import ${package}.${moduleName}.infra.persistence.mybatis.convertor.${sub.className}Convertor;
+import ${package}.${moduleName}.infra.persistence.mybatis.entity.${sub.className}DO;
+import ${package}.${moduleName}.infra.persistence.mybatis.repository.impl.${sub.className}RepositoryImpl;
 import ${package}.${moduleName}.interfaces.facade.convertor.${sub.className}DtoConvertor;
 import ${package}.${moduleName}.interfaces.facade.dto.${sub.className}Dto;
 #end
