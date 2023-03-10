@@ -1,4 +1,4 @@
-package ${package}.${moduleName}.infra.persistence.mybatis.repository.impl;
+package ${package}.${moduleName}.infra.persistence.repository.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -6,9 +6,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import ${package}.${moduleName}.domain.model.entity.${className};
 import ${package}.${moduleName}.domain.model.types.${className}Id;
 import ${package}.${moduleName}.domain.repository.${className}Repository;
-import ${package}.${moduleName}.infra.persistence.mybatis.convertor.${className}Convertor;
-import ${package}.${moduleName}.infra.persistence.mybatis.entity.${className}Do;
-import ${package}.${moduleName}.infra.persistence.mybatis.mapper.${className}Mapper;
+import ${package}.${moduleName}.infra.persistence.convertor.${className}Convertor;
+import ${package}.${moduleName}.infra.persistence.entity.${className}Do;
+import ${package}.${moduleName}.infra.persistence.mapper.${className}Mapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 import top.kdla.framework.dto.PageQuery;

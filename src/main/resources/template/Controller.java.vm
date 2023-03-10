@@ -19,10 +19,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import lombok.extern.slf4j.Slf4j;
 #if(${isFirst})
-import ${package}.${moduleName}.interfaces.facade.${className}AllServiceFacade;
-import ${package}.${moduleName}.client.dto.command.${className}AllCommand;
+##import ${package}.${moduleName}.client.dto.command.${className}AllCommand;
 #end
-import java.util.Arrays;
+import java.util.*;
 import javax.annotation.Resource;
 
 
@@ -49,29 +48,29 @@ public class ${className}Controller {
     @Resource
     private ${className}DtoConvertor  ${pathName}DtoConvertor;
 
-    #if(${isFirst})
-
-    @Resource
-    private ${className}AllServiceFacade ${pathName}AllServiceFacade;
-    /**
-     * 全量保存
-     */
-    @RequestMapping("/saveall")
-##    @RequiresPermissions("${moduleName}:${pathName}:save")
-    public SingleResponse saveall(@RequestBody ${className}AllCommand ${pathName}AllCommand) {
-        ValidatorUtils.validateEntity(${pathName}AllCommand, AddGroup.class);
-        ${pathName}AllServiceFacade.saveAll(${pathName}AllCommand);
-        return SingleResponse.buildSuccess();
-    }
-    #end
+##    #if(${isFirst})
+##
+##    @Resource
+##    private ${className}AllServiceFacade ${pathName}AllServiceFacade;
+##    /**
+##     * 全量保存
+##     */
+##    @RequestMapping("/saveall")
+####    @RequiresPermissions("${moduleName}:${pathName}:save")
+##    public SingleResponse saveall(@RequestBody ${className}AllCommand ${pathName}AllCommand) {
+##        ValidatorUtils.validateEntity(${pathName}AllCommand, AddGroup.class);
+##        ${pathName}AllServiceFacade.saveAll(${pathName}AllCommand);
+##        return SingleResponse.buildSuccess();
+##    }
+##    #end
 
     /**
      * ${comments}分页查询
      */
     @Operation(summary="${comments}分页查询")
-    @GetMapping("/page")
+    @PostMapping("/page")
 ##    @RequiresPermissions("${moduleName}:${pathName}:list")
-    public PageResponse<${className}Dto> page(${className}PageQuery ${pathName}PageQuery) {
+    public PageResponse<${className}Dto> page(@RequestBody ${className}PageQuery ${pathName}PageQuery) {
         return ${pathName}QueryService.queryPage(${pathName}PageQuery);
     }
 
@@ -79,7 +78,7 @@ public class ${className}Controller {
      * ${comments}list查询
      */
     @Operation(summary="${comments}list查询")
-    @GetMapping("/list")
+    @PostMapping("/list")
         ##    @RequiresPermissions("${moduleName}:${pathName}:list")
     public MultiResponse<${className}Dto> list() {
         //TODO list query

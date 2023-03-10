@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="${package}.${moduleName}.infra.persistence.mybatis.mapper.${className}Mapper">
+<mapper namespace="${package}.${moduleName}.infra.persistence.mapper.${className}Mapper">
     <sql id="Base_Column_List">
     #foreach ($column in $columns)
         #if($foreach.hasNext)
@@ -11,7 +11,7 @@
     #end
     </sql>
     <select id="queryPage" parameterType="Map"
-            resultType="${package}.${moduleName}.infra.persistence.mybatis.entity.${className}Do">
+            resultType="${package}.${moduleName}.infra.persistence.entity.${className}Do">
         SELECT
         <include refid="Base_Column_List" />
         FROM
@@ -51,7 +51,7 @@
     </select>
 
     <select id="queryEntity" parameterType="Map"
-            resultType="${package}.${moduleName}.infra.persistence.mybatis.entity.${className}Do">
+            resultType="${package}.${moduleName}.infra.persistence.entity.${className}Do">
         SELECT
         <include refid="Base_Column_List" />
         FROM
@@ -67,7 +67,7 @@
     </select>
 
     <select id="findById"
-            resultType="${package}.${moduleName}.infra.persistence.mybatis.entity.${className}Do">
+            resultType="${package}.${moduleName}.infra.persistence.entity.${className}Do">
         SELECT
         <include refid="Base_Column_List" />
         FROM

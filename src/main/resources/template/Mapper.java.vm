@@ -1,8 +1,8 @@
-package ${package}.${moduleName}.infra.persistence.mybatis.mapper;
+package ${package}.${moduleName}.infra.persistence.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import ${package}.${moduleName}.infra.persistence.mybatis.entity.${className}Do;
+import ${package}.${moduleName}.infra.persistence.entity.${className}Do;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

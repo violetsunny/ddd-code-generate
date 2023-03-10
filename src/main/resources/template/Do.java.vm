@@ -1,4 +1,4 @@
-package ${package}.${moduleName}.infra.persistence.mybatis.entity;
+package ${package}.${moduleName}.infra.persistence.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.io.Serializable;
 
 /**
- * ${comments}DO
+ * ${comments}Do
  *
  * @author ${author}
  * @email ${email}

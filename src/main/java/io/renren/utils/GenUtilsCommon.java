@@ -87,8 +87,8 @@ public class GenUtilsCommon {
         templates.add("template/RepositoryImpl.java.vm");
 //        templates.add("template/Service.java.vm");
 //        templates.add("template/ServiceImpl.java.vm");
-//        templates.add("template/ServiceFacade.java.vm");
-//        templates.add("template/ServiceFacadeImpl.java.vm");
+        templates.add("template/ServiceFacade.java.vm");
+        templates.add("template/ServiceFacadeImpl.java.vm");
         templates.add("template/ApplicationService.java.vm");
         templates.add("template/ApplicationServiceImpl.java.vm");
         templates.add("template/QueryService.java.vm");
@@ -97,13 +97,13 @@ public class GenUtilsCommon {
         templates.add("template/entity-select.vue.vm");
         if (isComplex) {
             if (isFirst) {
-                templates.add("template/ServiceFacadeAll.java.vm");
                 templates.add("template/indexAll.vue.vm");
                 templates.add("template/add-or-update-all.vue.vm");
                 //需要子表的数据
                 templates.add("template/index-update.vue.vm");
                 templates.add("template/CommandAll.java.vm");
-                templates.add("template/ServiceFacadeImplAll.java.vm");
+//                templates.add("template/ServiceFacadeAll.java.vm");
+//                templates.add("template/ServiceFacadeImplAll.java.vm");
                 templates.add("template/menu-all.sql.vm");
                 templates.add("template/user-select.vue.vm");
             } else {
@@ -145,6 +145,21 @@ public class GenUtilsCommon {
                     + "command" + File.separator
                     + className + "Command.java";
         }
+        if (template.contains("/CommandAll.java.vm")) {
+            return packagePath
+                    + "client" + File.separator
+                    //+ "sys" + File.separator
+                    + "dto" + File.separator
+                    + "command" + File.separator
+                    + className + "AllCommand.java";
+        }
+        if (template.contains("ServiceFacade.java.vm")) {
+            return packagePath
+                    + "client" + File.separator
+                    //+ "sys" + File.separator
+                    + "facade" + File.separator
+                    + className + "ServiceFacade.java";
+        }
         //com.enn.srm.supplier.client.dto.query
         if (template.contains("/PageQuery.java.vm")) {
             return packagePath
@@ -165,18 +180,18 @@ public class GenUtilsCommon {
         //com.ennew.boot.infrastructure.persistence.mybatis.convertor
         if (template.contains("/Convertor.java.vm")) {
             return packagePath
-                    + "infrastructure" + File.separator
+                    + "infra" + File.separator
                     + "persistence" + File.separator
-                    + "mybatis" + File.separator
+//                    + "mybatis" + File.separator
                     + "convertor" + File.separator
                     + className + "Convertor.java";
         }
         //com.ennew.boot.infrastructure.persistence.mybatis.entity
         if (template.contains("Do.java.vm")) {
             return packagePath
-                    + "infrastructure" + File.separator
+                    + "infra" + File.separator
                     + "persistence" + File.separator
-                    + "mybatis" + File.separator
+//                    + "mybatis" + File.separator
                     + "entity" + File.separator
                     + className + "Do.java";
         }
@@ -225,18 +240,18 @@ public class GenUtilsCommon {
         //com.ennew.boot.infrastructure.persistence.mybatis.mapper;
         if (template.contains("Mapper.java.vm")) {
             return packagePath
-                    + "infrastructure" + File.separator
+                    + "infra" + File.separator
                     + "persistence" + File.separator
-                    + "mybatis" + File.separator
+//                    + "mybatis" + File.separator
                     + "mapper" + File.separator
                     + className + "Mapper.java";
         }
         //com.ennew.boot.infrastructure.persistence.mybatis.mapper.xml;
         if (template.contains("Mapper.xml.vm")) {
             return packagePath
-                    + "infrastructure" + File.separator
+                    + "infra" + File.separator
                     + "persistence" + File.separator
-                    + "mybatis" + File.separator
+//                    + "mybatis" + File.separator
                     + "mapper" + File.separator
                     + "xml" + File.separator
                     + className + "Mapper.xml";
@@ -251,29 +266,21 @@ public class GenUtilsCommon {
         //com.ennew.boot.infrastructure.persistence.mybatis.repository.impl
         if (template.contains("RepositoryImpl.java.vm")) {
             return packagePath
-                    + "infrastructure" + File.separator
+                    + "infra" + File.separator
                     + "persistence" + File.separator
-                    + "mybatis" + File.separator
+//                    + "mybatis" + File.separator
                     + "repository" + File.separator
                     + "impl" + File.separator
                     + className + "RepositoryImpl.java";
         }
 
-        //com.ennew.boot.interfaces.sys.facade
-        if (template.contains("ServiceFacade.java.vm")) {
-            return packagePath
-                    + "interfaces" + File.separator
-                    //+ "sys" + File.separator
-                    + "facade" + File.separator
-                    + className + "ServiceFacade.java";
-        }
         //com.ennew.boot.interfaces.sys.facade.impl
         if (template.contains("ServiceFacadeImpl.java.vm")) {
             return packagePath
                     + "interfaces" + File.separator
                     //+ "sys" + File.separator
                     + "facade" + File.separator
-                    + "impl" + File.separator
+//                    + "impl" + File.separator
                     + className + "ServiceFacadeImpl.java";
         }
         //com.ennew.boot.application
@@ -391,16 +398,6 @@ public class GenUtilsCommon {
                     + fatherName.toLowerCase() + "-" + className.toLowerCase() + ".vue";
         }
 
-        //com.ennew.boot.interfaces.sys.web.command;
-        if (template.contains("/CommandAll.java.vm")) {
-            return packagePath
-                    + "interfaces" + File.separator
-                    //+ "sys" + File.separator
-                    + "web" + File.separator
-                    + "command" + File.separator
-                    + className + "AllCommand.java";
-        }
-
         //com.ennew.boot.interfaces.sys.facade.impl
         if (template.contains("ServiceFacadeImplAll.java.vm")) {
             return packagePath
@@ -447,7 +444,7 @@ public class GenUtilsCommon {
                 absolutePath = SysGeneratorController.applicationPath + "/src/" + fileName;
             } else if (fileName.indexOf("/domain/") >= 0 || fileName.indexOf("\\domain\\") >= 0 ) {
                 absolutePath = SysGeneratorController.domainPath + "/src/" + fileName;
-            } else if (fileName.indexOf("/infrastructure/") >= 0 || fileName.indexOf("\\infrastructure\\") >= 0 ) {
+            } else if (fileName.indexOf("/infra/") >= 0 || fileName.indexOf("\\infra\\") >= 0 ) {
                 absolutePath = SysGeneratorController.infrastructurePath + "/src/" + fileName;
             }  else if (fileName.indexOf("/client/") >= 0 || fileName.indexOf("\\client\\") >= 0 ) {
                 absolutePath = SysGeneratorController.clientPath + "/src/" + fileName;

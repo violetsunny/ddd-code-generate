@@ -1,27 +1,22 @@
-package ${package}.${moduleName}.interfaces.facade.impl;
+package ${package}.${moduleName}.interfaces.facade;
 
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import ${package}.${moduleName}.application.${className}Service;
-import ${package}.${moduleName}.domain.model.entity.${className};
-import ${package}.${moduleName}.domain.model.types.${className}Id;
-import ${package}.${moduleName}.domain.repository.${className}Repository;
+import top.kdla.framework.catchlog.CatchAndLog;
+import top.kdla.framework.dto.SingleResponse;
 import top.kdla.framework.dto.PageResponse;
-import top.kdla.framework.infra.dal.mybatis.util.Query;
-import ${package}.${moduleName}.infra.persistence.mybatis.entity.${className}Do;
-import ${package}.${moduleName}.infra.persistence.mybatis.mapper.${className}Mapper;
-import ${package}.${moduleName}.interfaces.facade.${className}ServiceFacade;
-import ${package}.${moduleName}.application.convertor.${className}DtoConvertor;
+import top.kdla.framework.dto.MultiResponse;
+import ${package}.${moduleName}.application.service.${className}QueryService;
+import ${package}.${moduleName}.application.service.${className}ApplicationService;
 import ${package}.${moduleName}.client.dto.${className}Dto;
+import ${package}.${moduleName}.client.dto.command.${className}Command;
+import ${package}.${moduleName}.client.dto.query.${className}PageQuery;
+import ${package}.${moduleName}.client.facade.${className}ServiceFacade;
+import ${package}.${moduleName}.application.convertor.${className}DtoConvertor;
 import org.springframework.stereotype.Component;
+import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.util.CollectionUtils;
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.*;
 
 /**
  * ${comments}FacadeImpl
@@ -31,63 +26,68 @@ import java.util.stream.Collectors;
  * @date ${datetime}
  */
 @Component
+@Slf4j
+@CatchAndLog
 public class ${className}ServiceFacadeImpl implements ${className}ServiceFacade {
 
 	@Resource
-	private ${className}Service ${pathName}Service;
+	private ${className}ApplicationService ${pathName}ApplicationService;
 
 	@Resource
-	private ${className}Mapper ${pathName}Mapper;
+	private  ${className}QueryService ${pathName}QueryService;
 
 	@Resource
-	private ${className}Repository ${pathName}Repository;
-
-	@Resource
-	private ${className}DtoConvertor dtoConvertor;
+	private ${className}DtoConvertor  ${pathName}DtoConvertor;
 
 
+	/**
+	 * ${comments}分页查询
+	 */
 	@Override
-	public PageResponse<${className}Dto> queryPage(Map<String, Object> params) {
-		IPage<${className}Do> page = ${pathName}Mapper.queryPage(new Query().getPage(params), params);
-		List<${className}Do> records = page.getRecords();
-		List<${className}Dto> dtoList = Collections.EMPTY_LIST;
-		if (CollectionUtils.isEmpty(records)) {
-			return PageResponse.of(dtoList, Long.valueOf(page.getTotal()).intValue(), Long.valueOf(page.getSize()).intValue(), Long.valueOf(page.getCurrent()).intValue());
-		}
-		dtoList = records.stream().map(dtoConvertor::fromDo).collect(Collectors.toList());
-		return PageResponse.of(dtoList, Long.valueOf(page.getTotal()).intValue(), Long.valueOf(page.getSize()).intValue(), Long.valueOf(page.getCurrent()).intValue());
+	public PageResponse<${className}Dto> page(${className}PageQuery ${pathName}PageQuery) {
+		return ${pathName}QueryService.queryPage(${pathName}PageQuery);
 	}
 
+	/**
+	 * ${comments}list查询
+	 */
 	@Override
-	public ${className}Dto find(String id) {
-		return dtoConvertor.from${className}(${pathName}Repository.find(new ${className}Id(id)));
+	public MultiResponse<${className}Dto> list() {
+		//TODO list query
+		return MultiResponse.buildSuccess(null);
 	}
 
+	/**
+	 * ${comments}信息
+	 */
 	@Override
-	public void save(${className}Dto ${pathName}Dto) {
-		${className} ${pathName} = dtoConvertor.to${className}(${pathName}Dto);
-		${pathName}Service.add(${pathName});
-		${pathName}Dto.setId(${pathName}.getId().getId());
+	public SingleResponse<${className}Dto> findById(String id) {
+		return SingleResponse.buildSuccess(${pathName}QueryService.findById(id));
 	}
 
+	/**
+	 * 保存${comments}
+	 */
 	@Override
-	public void update(${className}Dto ${pathName}Dto) {
-		${className} ${pathName} = dtoConvertor.to${className}(${pathName}Dto);
-		${pathName}Service.update(${pathName} );
+	public SingleResponse<Boolean> save(${className}Command ${pathName}Command) {
+		return SingleResponse.buildSuccess(${pathName}ApplicationService.add(${pathName}Command));
+
 	}
 
+	/**
+	 * 修改${comments}
+	 */
 	@Override
-	public void deleteBatch(List<String> ids) {
-		List<${className}Id> tempIds = new ArrayList<>();
-		ids.forEach(id -> {
-			tempIds.add(new ${className}Id(id));
-		});
-		${pathName}Service.delete(tempIds);
+	public SingleResponse<Boolean> update( ${className}Command ${pathName}Command) {
+		return SingleResponse.buildSuccess(${pathName}ApplicationService.update(${pathName}Command));
 	}
 
+	/**
+	 * 删除${comments}
+	 */
 	@Override
-	public void disable(String id) {
-		${pathName}Service.disable(new ${className}Id(id));
+	public SingleResponse<Boolean> delete(String[] ids) {
+		return SingleResponse.buildSuccess(${pathName}ApplicationService.deleteBatch(Arrays.asList(ids)));
 	}
 
 }

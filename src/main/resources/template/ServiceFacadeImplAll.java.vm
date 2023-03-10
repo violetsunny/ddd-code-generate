@@ -3,22 +3,22 @@ package ${package}.${moduleName}.interfaces.facade.impl;
 #foreach ($sub in $subList)
 import ${package}.${moduleName}.client.dto.command.${sub.className}Command;
 import ${package}.${moduleName}.domain.model.entity.${sub.className};
-import ${package}.${moduleName}.infra.persistence.mybatis.convertor.${sub.className}Convertor;
-import ${package}.${moduleName}.infra.persistence.mybatis.entity.${sub.className}DO;
-import ${package}.${moduleName}.infra.persistence.mybatis.repository.impl.${sub.className}RepositoryImpl;
-import ${package}.${moduleName}.interfaces.facade.convertor.${sub.className}DtoConvertor;
-import ${package}.${moduleName}.interfaces.facade.dto.${sub.className}Dto;
+import ${package}.${moduleName}.infra.persistence.convertor.${sub.className}Convertor;
+import ${package}.${moduleName}.infra.persistence.entity.${sub.className}Do;
+import ${package}.${moduleName}.infra.persistence.repository.impl.${sub.className}RepositoryImpl;
+import ${package}.${moduleName}.application.convertor.${sub.className}DtoConvertor;
+import ${package}.${moduleName}.client.dto.${sub.className}Dto;
 #end
 import ${package}.${moduleName}.interfaces.facade.${className}AllServiceFacade;
 import ${package}.${moduleName}.interfaces.facade.${className}ServiceFacade;
-import ${package}.${moduleName}.interfaces.facade.dto.${className}Dto;
+import ${package}.${moduleName}.client.dto.${className}Dto;
 import ${package}.${moduleName}.client.dto.command.${className}AllCommand;
 import ${package}.${moduleName}.client.dto.command.${className}Command;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,6 +39,10 @@ public class ${className}AllServiceFacadeImpl implements ${className}AllServiceF
 	#foreach ($sub in $subList)
 	@Resource
 	private ${sub.className}RepositoryImpl ${sub.pathName}Repository;
+	@Resource
+	private ${sub.className}DtoConvertor  ${sub.pathName}DtoConvertor;
+	@Resource
+	private ${sub.className}Convertor  ${sub.pathName}Convertor;
 	#end
 
 	@Override

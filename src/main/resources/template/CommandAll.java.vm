@@ -16,15 +16,15 @@ import java.util.List;
 @Schema(name = "${comments}", description = "${comments}")
 public class ${className}AllCommand {
 
-	@ApiModelProperty(value = "${comments}")
+	@Schema(description = "$comments")
 	private ${className}Command ${classname};
 
 	#foreach ($sub in $subList)
-		/**
-		 * $sub.comments
-		 */
-		@Schema(description = "$sub.comments")
-		private List<${sub.className}Command> ${sub.classname};
+	/**
+	 * $sub.comments
+	 */
+	@Schema(description = "$sub.comments")
+	private List<${sub.className}Command> ${sub.classname};
 	#end
 
 }

@@ -1,9 +1,9 @@
-package ${package}.${moduleName}.infra.persistence.mybatis.convertor;
+package ${package}.${moduleName}.infra.persistence.convertor;
 
 
 import ${package}.${moduleName}.domain.model.entity.${className};
 import ${package}.${moduleName}.domain.model.types.${className}Id;
-import ${package}.${moduleName}.infra.persistence.mybatis.entity.${className}Do;
+import ${package}.${moduleName}.infra.persistence.entity.${className}Do;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

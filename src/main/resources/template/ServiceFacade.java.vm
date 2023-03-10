@@ -1,11 +1,11 @@
-package ${package}.${moduleName}.interfaces.facade;
+package ${package}.${moduleName}.client.facade;
 
-
+import top.kdla.framework.dto.SingleResponse;
 import top.kdla.framework.dto.PageResponse;
+import top.kdla.framework.dto.MultiResponse;
 import ${package}.${moduleName}.client.dto.${className}Dto;
-
-import java.util.List;
-import java.util.Map;
+import ${package}.${moduleName}.client.dto.command.${className}Command;
+import ${package}.${moduleName}.client.dto.query.${className}PageQuery;
 
 
 /**
@@ -20,11 +20,15 @@ public interface ${className}ServiceFacade {
     /**
      * 分页查询
      *
-     * @param params
+     * @param ${pathName}PageQuery
      * @return
      */
-    PageResponse<${className}Dto> queryPage(Map<String, Object> params);
+    PageResponse<${className}Dto> page(${className}PageQuery ${pathName}PageQuery);
 
+    /**
+     * ${comments}list查询
+     */
+    MultiResponse<${className}Dto> list();
 
     /**
      * 通过ID获取${comments}
@@ -32,34 +36,27 @@ public interface ${className}ServiceFacade {
      * @param id
      * @return
      */
-    ${className}Dto find(String id);
+    SingleResponse<${className}Dto> findById(String id);
 
     /**
      * 保存
      *
-     * @param ${pathName}Dto
+     * @param ${pathName}Command
      */
-    void save(${className}Dto ${pathName}Dto);
+    SingleResponse<Boolean> save(${className}Command ${pathName}Command);
 
     /**
      * 更新
      *
-     * @param ${pathName}Dto
+     * @param ${pathName}Command
      */
-    void update(${className}Dto ${pathName}Dto);
+    SingleResponse<Boolean> update( ${className}Command ${pathName}Command);
 
     /**
      * 批量删除
      *
      * @param ids
      */
-    void deleteBatch(List<String> ids);
-
-    /**
-     * 禁用员工
-     *
-     * @param id
-     */
-    void disable(String id);
+    SingleResponse<Boolean> delete(String[] ids);
 
 }
