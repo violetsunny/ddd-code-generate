@@ -41,10 +41,8 @@ public class ${className}Controller {
 
     @Resource
     private ${className}ApplicationService ${pathName}ApplicationService;
-
     @Resource
     private  ${className}QueryService ${pathName}QueryService;
-
     @Resource
     private ${className}DtoConvertor  ${pathName}DtoConvertor;
 
@@ -91,7 +89,7 @@ public class ${className}Controller {
     @Operation(summary="${comments}信息")
     @GetMapping("/find/{id}")
 ##    @RequiresPermissions("${moduleName}:${pathName}:info")
-    public SingleResponse<${className}Dto> findById(@PathVariable("id") String id) {
+    public SingleResponse<${className}Dto> findById(@PathVariable("id") Long id) {
         return SingleResponse.buildSuccess(${pathName}QueryService.findById(id));
     }
 
@@ -122,8 +120,8 @@ public class ${className}Controller {
     @Operation(summary="删除${comments}")
     @PostMapping("/delete")
 ##    @RequiresPermissions("${moduleName}:${pathName}:delete")
-    public SingleResponse<Boolean> delete(@RequestBody String[] ids) {
-        return SingleResponse.buildSuccess(${pathName}ApplicationService.deleteBatch(Arrays.asList(ids)));
+    public SingleResponse<Boolean> delete(@RequestBody List<Long> ids) {
+        return SingleResponse.buildSuccess(${pathName}ApplicationService.deleteBatch(ids));
     }
 
 }

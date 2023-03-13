@@ -12,7 +12,7 @@ import ${package}.${moduleName}.application.convertor.${className}DtoConvertor;
 import ${package}.${moduleName}.client.dto.${className}Dto;
 import ${package}.${moduleName}.client.dto.query.${className}PageQuery;
 import org.springframework.stereotype.Service;
-
+import lombok.extern.slf4j.Slf4j;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
@@ -26,11 +26,11 @@ import java.util.stream.Collectors;
  * @date ${datetime}
  */
 @Service
+@Slf4j
 public class ${className}QueryServiceImpl implements ${className}QueryService {
 
 	@Resource
 	private ${className}Repository ${pathName}Repository;
-
 	@Resource
 	private ${className}DtoConvertor dtoConvertor;
 
@@ -44,7 +44,7 @@ public class ${className}QueryServiceImpl implements ${className}QueryService {
 	}
 
 	@Override
-	public ${className}Dto findById(String id) {
+	public ${className}Dto findById(Long id) {
 		return dtoConvertor.from${className}(${pathName}Repository.findById(new ${className}Id(id)));
 	}
 

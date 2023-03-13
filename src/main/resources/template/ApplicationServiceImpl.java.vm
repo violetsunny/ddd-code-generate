@@ -49,7 +49,7 @@ public class ${className}ApplicationServiceImpl implements ${className}Applicati
 	}
 
 	@Override
-	public boolean deleteBatch(List<String> ids) {
+	public boolean deleteBatch(List<Long> ids) {
 		List<${className}Id> tempIds = new ArrayList<>();
 		ids.forEach(id -> {
 			tempIds.add(new ${className}Id(id));

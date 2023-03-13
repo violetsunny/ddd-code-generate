@@ -18,11 +18,11 @@
         ${tableName}
         <where>
             #foreach ($column in $columns)
-                #if($column.attrname == "delFlag")
-                AND del_flag='0'
+                #if($column.attrname == "deleted")
+                AND deleted = 0
                 #end
                 #if($column.attrname != "id"
-                &&$column.attrname != "delFlag"
+                &&$column.attrname != "deleted"
                 &&$column.attrname != "createBy"
                 &&$column.attrname != "createTime"
                 &&$column.attrname != "updateBy"
@@ -57,12 +57,32 @@
         FROM
         ${tableName}
         <where>
-            #if($!columns.contains("delFlag"))
-            AND del_flag='0'
-            #end
             <if test="params.id != null">
                 AND id = #{params.id}
             </if>
+            #foreach ($column in $columns)
+                #if($column.columnName == "deleted")
+                    AND deleted = 0
+                #end
+            #end
+        </where>
+    </select>
+
+    <select id="queryList" parameterType="Map"
+            resultType="${package}.${moduleName}.infra.persistence.entity.${className}Do">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM
+        ${tableName}
+        <where>
+            <if test="params.id != null">
+                AND id = #{params.id}
+            </if>
+            #foreach ($column in $columns)
+                #if($column.columnName == "deleted")
+                    AND deleted = 0
+                #end
+            #end
         </where>
     </select>
 
@@ -73,5 +93,10 @@
         FROM
         ${tableName}
         where id = #{id}
+#foreach ($column in $columns)
+    #if($column.columnName == "deleted")
+        AND deleted = 0
+    #end
+#end
     </select>
 </mapper>

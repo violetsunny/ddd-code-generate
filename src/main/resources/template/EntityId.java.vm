@@ -1,7 +1,9 @@
 package ${package}.${moduleName}.domain.model.types;
 
 import top.kdla.framework.domain.shared.ValueObject;
-import org.apache.commons.lang3.StringUtils;
+import java.util.Objects;
+
+import lombok.Data;
 
 /**
  * ${comments}ID
@@ -10,18 +12,19 @@ import org.apache.commons.lang3.StringUtils;
  * @email ${email}
  * @date ${datetime}
  */
+@Data
 public class ${className}Id implements ValueObject<${className}Id> {
 
-	private final String id;
+	private final Long id;
 
-	public ${className}Id(final String id) {
-		if(StringUtils.isEmpty(id)) {
+	public ${className}Id(final Long id) {
+		if(Objects.isNull(id)) {
 			throw new IllegalArgumentException("${comments}id不能为空");
 		}
 		this.id = id;
 	}
 
-	public String get() {
+	public Long get() {
 		return id;
 	}
 
@@ -32,6 +35,6 @@ public class ${className}Id implements ValueObject<${className}Id> {
 
 	@Override
 	public String toString() {
-		return id;
+		return String.valueOf(id);
 	}
 }

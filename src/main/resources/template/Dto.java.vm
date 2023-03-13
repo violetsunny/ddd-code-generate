@@ -25,7 +25,7 @@ import top.kdla.framework.dto.BaseModel;
 @Data
 public class ${className}Dto extends BaseModel {
     #foreach ($column in $columns)
-##    #if($column.attrname != "delFlag"
+##    #if($column.attrname != "deleted"
 ##    &&$column.attrname != "createBy"
 ##    &&$column.attrname != "createTime"
 ##    &&$column.attrname != "updateBy"

@@ -9,7 +9,7 @@ import ${package}.${moduleName}.infra.persistence.entity.${className}Do;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
-import org.springframework.util.StringUtils;
+import java.util.Objects;
 
 /**
  * ${comments}DtoConvertor
@@ -59,15 +59,15 @@ public interface ${className}DtoConvertor {
      */
       ${className}Dto fromDo(final ${className}Do ${pathName}Do);
 
-      default ${className}Id id2id(String id) {
-         if (StringUtils.hasText(id)) {
+      default ${className}Id id2id(Long id) {
+          if(Objects.isNull(id)) {
              return null;
          }
           return new ${className}Id(id);
       }
 
-      default String id2id(${className}Id typeId) {
-         if (typeId == null) {
+      default Long id2id(${className}Id typeId) {
+          if(Objects.isNull(typeId)) {
              return null;
          }
          return typeId.get();

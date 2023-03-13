@@ -32,10 +32,8 @@ public class ${className}ServiceFacadeImpl implements ${className}ServiceFacade 
 
 	@Resource
 	private ${className}ApplicationService ${pathName}ApplicationService;
-
 	@Resource
-	private  ${className}QueryService ${pathName}QueryService;
-
+	private ${className}QueryService ${pathName}QueryService;
 	@Resource
 	private ${className}DtoConvertor  ${pathName}DtoConvertor;
 
@@ -61,7 +59,7 @@ public class ${className}ServiceFacadeImpl implements ${className}ServiceFacade 
 	 * ${comments}信息
 	 */
 	@Override
-	public SingleResponse<${className}Dto> findById(String id) {
+	public SingleResponse<${className}Dto> findById(Long id) {
 		return SingleResponse.buildSuccess(${pathName}QueryService.findById(id));
 	}
 
@@ -86,8 +84,8 @@ public class ${className}ServiceFacadeImpl implements ${className}ServiceFacade 
 	 * 删除${comments}
 	 */
 	@Override
-	public SingleResponse<Boolean> delete(String[] ids) {
-		return SingleResponse.buildSuccess(${pathName}ApplicationService.deleteBatch(Arrays.asList(ids)));
+	public SingleResponse<Boolean> delete(List<Long> ids) {
+		return SingleResponse.buildSuccess(${pathName}ApplicationService.deleteBatch(ids));
 	}
 
 }

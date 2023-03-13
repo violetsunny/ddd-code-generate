@@ -1,6 +1,6 @@
 #foreach ($column in $columns)
   #if($column.attrname != "id"
-  &&$column.attrname != "delFlag"
+  &&$column.attrname != "deleted"
   &&$column.attrname != "createBy"
   &&$column.attrname != "createTime"
   &&$column.attrname != "updateBy"
@@ -18,7 +18,7 @@
       #foreach ($column in $columns)
 
         #if($column.attrname != "id"
-        &&$column.attrname != "delFlag"
+        &&$column.attrname != "deleted"
         &&$column.attrname != "createBy"
         &&$column.attrname != "createTime"
         &&$column.attrname != "updateBy"
@@ -115,7 +115,7 @@
         </el-button>
         #foreach ($column in $columns)
           #if($column.attrname != "id"
-          &&$column.attrname != "delFlag"
+          &&$column.attrname != "deleted"
           &&$column.attrname != "createBy"
           &&$column.attrname != "createTime"
           &&$column.attrname != "updateBy"
@@ -159,7 +159,7 @@
 
       #foreach ($column in $columns)
         #if($column.attrname != "id"
-        &&$column.attrname != "delFlag"
+        &&$column.attrname != "deleted"
         &&$column.attrname != "createBy"
         &&$column.attrname != "createTime"
         &&$column.attrname != "updateBy"
@@ -235,7 +235,7 @@
         dataForm: {
           #foreach ($column in $columns)
             #if($column.attrname != "id"
-            &&$column.attrname != "delFlag"
+            &&$column.attrname != "deleted"
             &&$column.attrname != "createBy"
             &&$column.attrname != "createTime"
             &&$column.attrname != "updateBy"
@@ -310,7 +310,7 @@
                 'limit': this.pageSize,
                 #foreach ($column in $columns)
         #if($column.attrname != "id"
-                &&$column.attrname != "delFlag"
+                &&$column.attrname != "deleted"
                 &&$column.attrname != "createBy"
                 &&$column.attrname != "createTime"
                 &&$column.attrname != "updateBy"

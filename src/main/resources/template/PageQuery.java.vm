@@ -20,7 +20,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Data
 public class ${className}PageQuery extends PageQuery {
     #foreach ($column in $columns)
-##    #if($column.attrname != "delFlag"
+##    #if($column.attrname != "deleted"
 ##    &&$column.attrname != "createBy"
 ##    &&$column.attrname != "createTime"
 ##    &&$column.attrname != "updateBy"

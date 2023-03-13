@@ -7,7 +7,7 @@
 
             #foreach ($column in $columns)
                 #if($column.attrname != "id"
-                &&$column.attrname != "delFlag"
+                &&$column.attrname != "deleted"
                 &&$column.attrname != "createBy"
                 &&$column.attrname != "createTime"
                 &&$column.attrname != "updateBy"
@@ -137,7 +137,7 @@
                 dataForm: {
             #foreach ($column in $columns)
             #if($column.attrname != "id"
-                    &&$column.attrname != "delFlag"
+                    &&$column.attrname != "deleted"
                     &&$column.attrname != "createBy"
                     &&$column.attrname != "createTime"
                     &&$column.attrname != "updateBy"
@@ -153,7 +153,7 @@
             dataRule: {
                 #foreach ($column in $columns)
                 #if($column.attrname != "id"
-                        &&$column.attrname != "delFlag"
+                        &&$column.attrname != "deleted"
                         &&$column.attrname != "createBy"
                         &&$column.attrname != "createTime"
                         &&$column.attrname != "updateBy"
@@ -209,7 +209,7 @@
                             if (data && data.code === 0) {
                                 #foreach ($column in $columns)
                                 #if($column.attrname != "id"
-                                        &&$column.attrname != "delFlag"
+                                        &&$column.attrname != "deleted"
                                         &&$column.attrname != "createBy"
                                         &&$column.attrname != "createTime"
                                         &&$column.attrname != "updateBy"

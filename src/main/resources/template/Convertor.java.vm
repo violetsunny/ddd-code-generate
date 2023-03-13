@@ -7,6 +7,7 @@ import ${package}.${moduleName}.infra.persistence.entity.${className}Do;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import java.util.Objects;
 
 /**
  * ${comments}Convertor
@@ -28,15 +29,15 @@ public interface ${className}Convertor {
 	})
 	${className}Do from${className}(${className} ${pathName});
 
-	default ${className}Id id2id(String id) {
-		if (id == null) {
+	default ${className}Id id2id(Long id) {
+		if(Objects.isNull(id)) {
 			return null;
 		}
 		return new ${className}Id(id);
 	}
 
-	default String id2id(${className}Id typeId) {
-		if (typeId == null) {
+	default Long id2id(${className}Id typeId) {
+		if(Objects.isNull(typeId)) {
 			return null;
 		}
 		return typeId.get();

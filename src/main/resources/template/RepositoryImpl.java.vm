@@ -65,7 +65,7 @@ public class ${className}RepositoryImpl extends ServiceImpl<${className}Mapper, 
 
 	@Override
 	public boolean delete(List<${className}Id> ids) {
-		List<String> tempIds = new ArrayList<>();
+		List<Long> tempIds = new ArrayList<>();
 		ids.forEach(tempId -> {
 			tempIds.add(tempId.get());
 		});

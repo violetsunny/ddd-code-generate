@@ -35,7 +35,6 @@ public class ${className}AllServiceFacadeImpl implements ${className}AllServiceF
 
 	@Resource
 	private ${className}ServiceFacade ${pathName}ServiceFacade;
-
 	#foreach ($sub in $subList)
 	@Resource
 	private ${sub.className}RepositoryImpl ${sub.pathName}Repository;

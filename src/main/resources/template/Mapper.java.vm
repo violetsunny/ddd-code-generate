@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Map;
+import java.util.List;
 
 /**
  * ${comments}Mapper
@@ -36,9 +37,17 @@ public interface ${className}Mapper extends BaseMapper<${className}Do> {
     ${className}Do queryEntity(@Param("params") Map<String, Object> params);
 
     /**
+     * 查询
+     *
+     * @param params
+     * @return
+     */
+    List<${className}Do> queryList(@Param("params") Map<String, Object> params);
+
+    /**
      * 根据ID查询
      * @param id
      * @return
      */
-    ${className}Do findById(@Param("id") String id);
+    ${className}Do findById(@Param("id") Long id);
 }

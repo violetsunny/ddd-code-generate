@@ -1,6 +1,6 @@
 #foreach ($column in $columns)
     #if($column.attrname != "id"
-    &&$column.attrname != "delFlag"
+    &&$column.attrname != "deleted"
     &&$column.attrname != "createBy"
     &&$column.attrname != "createTime"
     &&$column.attrname != "updateBy"
@@ -20,7 +20,7 @@
         <el-form :inline="true" :model="dataForm" @keyup.enter.native="getDataList()">
             #foreach ($column in $columns)
                 #if($column.attrname != "id"
-                &&$column.attrname != "delFlag"
+                &&$column.attrname != "deleted"
                 &&$column.attrname != "createBy"
                 &&$column.attrname != "createTime"
                 &&$column.attrname != "updateBy"
@@ -46,7 +46,7 @@
 
             #foreach ($column in $columns)
                 #if($column.attrname != "id"
-                &&$column.attrname != "delFlag"
+                &&$column.attrname != "deleted"
                 &&$column.attrname != "createBy"
                 &&$column.attrname != "createTime"
                 &&$column.attrname != "updateBy"
@@ -101,7 +101,7 @@
                 dataForm: {
             #foreach ($column in $columns)
                 #if($column.attrname != "id"
-                &&$column.attrname != "delFlag"
+                &&$column.attrname != "deleted"
                 &&$column.attrname != "createBy"
                 &&$column.attrname != "createTime"
                 &&$column.attrname != "updateBy"
@@ -146,7 +146,7 @@
                         'limit': this.pageSize,
                     #foreach ($column in $columns)
                     #if($column.attrname != "id"
-                    &&$column.attrname != "delFlag"
+                    &&$column.attrname != "deleted"
                     &&$column.attrname != "createBy"
                     &&$column.attrname != "createTime"
                     &&$column.attrname != "updateBy"

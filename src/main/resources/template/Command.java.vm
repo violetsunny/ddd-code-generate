@@ -30,7 +30,7 @@ import java.time.LocalDateTime;
 @Schema(name = "${comments}", description = "${comments}")
 public class ${className}Command extends Command {
 #foreach ($column in $columns)
-##	#if($column.attrname != "delFlag"
+##	#if($column.attrname != "deleted"
 ##	&&$column.attrname != "createBy"
 ##	&&$column.attrname != "createTime"
 ##	&&$column.attrname != "updateBy"

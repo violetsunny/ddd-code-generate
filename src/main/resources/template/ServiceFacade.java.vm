@@ -7,6 +7,7 @@ import ${package}.${moduleName}.client.dto.${className}Dto;
 import ${package}.${moduleName}.client.dto.command.${className}Command;
 import ${package}.${moduleName}.client.dto.query.${className}PageQuery;
 
+import java.util.List;
 
 /**
  * ${comments}Facade
@@ -36,7 +37,7 @@ public interface ${className}ServiceFacade {
      * @param id
      * @return
      */
-    SingleResponse<${className}Dto> findById(String id);
+    SingleResponse<${className}Dto> findById(Long id);
 
     /**
      * 保存
@@ -57,6 +58,6 @@ public interface ${className}ServiceFacade {
      *
      * @param ids
      */
-    SingleResponse<Boolean> delete(String[] ids);
+    SingleResponse<Boolean> delete(List<Long> ids);
 
 }

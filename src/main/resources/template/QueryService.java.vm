@@ -29,6 +29,6 @@ public interface ${className}QueryService {
      * @param id
      * @return
      */
-    ${className}Dto findById(String id);
+    ${className}Dto findById(Long id);
 
 }

@@ -20,7 +20,7 @@
 使用本代码生成有以下规则必须遵守，不然生成的代码无法运行：
 
 - （1）表的主键必须命名为id且为varchar类型：例子 `id` varchar(32) NOT NULL
-- （2）有7个属性字段必须包含其中包含tenant_id、status、del_flag、created_by、created_time、updated_by、updated_time
+- （2）有7个属性字段必须包含其中包含tenant_id、status、deleted、created_by、created_time、updated_by、updated_time
 
 除了以上的8个字段属性之外自己可以根据实际的情况来添加，建表实例：
 ```sql
